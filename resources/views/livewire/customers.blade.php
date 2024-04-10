@@ -25,7 +25,9 @@
             <td>
                 <button class="btn btn-primary btn-sm" wire:navigate href="/customers/{{$customer->id}}">View</button>
                 <button class="btn btn-secondary btn-sm" wire:navigate href="/customers/{{$customer->id}}/edit">Edit</button>
-                <button class="btn btn-danger btn-sm">Delete</button>
+                {{-- <button class="btn btn-danger btn-sm" wire:click="deleteCustomer({{$customer->id}})" onclick="return confirm('Sure to delete?')">Delete</button> --}}
+                <button class="btn btn-danger btn-sm" onclick="if (!confirm('Sure to delete?')) { event.stopPropagation(); return false; } else { @this.deleteCustomer({{ $customer->id }}) }">Delete</button>
+
             </td>
           </tr>
           <tr>

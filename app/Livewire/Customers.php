@@ -23,4 +23,13 @@ class Customers extends Component
 
         return view('livewire.customers');
     }
+
+
+    public function deleteCustomer(Customer $customer)
+    {
+        $customer->delete();
+        session()->flash('success', 'Customer Deleted Successfully');
+        return $this->redirect('/customers',navigate:true);
+
+    }
 }
