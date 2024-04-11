@@ -9,11 +9,15 @@ class Customers extends Component
 {
     public $customers=[];
 
+    public $search='';
 
-    public function mount()
-    {
-        $this->customers=Customer::all();
-    }
+
+
+
+    // public function mount()
+    // {
+    //     $this->customers=Customer::all();
+    // }
 
 
 
@@ -21,7 +25,15 @@ class Customers extends Component
     public function render()
     {
 
+        if(! $this->search) {
+            $this->customers=Customer::all();
+        }
+        else {
+            $this->customers=Customer::where('name', 'like', '%'.$this->search. '%')->get();
+        }
+
         return view('livewire.customers');
+
     }
 
 

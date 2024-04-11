@@ -13,6 +13,7 @@
     </head>
     <body>
         <div class="container">
+            <livewire:nav-bar/>
         {{ $slot }}
     </div>
     </body>
