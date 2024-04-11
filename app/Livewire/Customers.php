@@ -4,10 +4,14 @@ namespace App\Livewire;
 
 use App\Models\Customer;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Customers extends Component
 {
-    public $customers=[];
+
+    use WithPagination;
+    protected $paginationTheme='bootstrap';
+   // public $customers=[];
 
     public $search='';
 
@@ -26,13 +30,15 @@ class Customers extends Component
     {
 
         if(! $this->search) {
-            $this->customers=Customer::all();
+            $customers=Customer::paginate(1);
         }
         else {
-            $this->customers=Customer::where('name', 'like', '%'.$this->search. '%')->get();
+            $customers=Customer::where('name', 'like', '%'.$this->search. '%')->paginate(1);
         }
 
-        return view('livewire.customers');
+        return view('livewire.customers', [
+            'customers' => $customers,
+        ]);
 
     }
 
